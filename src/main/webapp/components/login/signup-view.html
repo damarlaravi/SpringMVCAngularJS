@@ -13,16 +13,40 @@
                 <div class="field">
                     <label for="firstName">First Name:</label>
                     <input type="text" name="firstName" value="" id="firstName" placeholder="First Name"
-                           class="login" ng-model="userRoles.firstName" validator="required"
-                           required-error-message="First Name is required" valid-method="watch" />
+                           class="login"
+                           ng-model="userRoles.firstName"
+                           ng-minlength="2"
+                           ng-maxlength="8"
+                           required />
+
+                    <!-- show an error if username is too short -->
+                    <p ng-show="signupForm.firstName.$error.minlength">First Name is too short.</p>
+
+                    <!-- show an error if username is too long -->
+                    <p ng-show="signupForm.firstName.$error.maxlength">First Name is too long.</p>
+
+                    <!-- show an error if this isn't filled in -->
+                    <p ng-show="signupForm.firstName.$error.required">First Name is required.</p>
                 </div>
                 <!-- /field -->
 
                 <div class="field">
                     <label for="lastName">Last Name:</label>
                     <input type="text" name="lastName" value="" id="lastName" placeholder="Last Name"
-                           class="login" ng-model="userRoles.lastName" validator="required"
-                           required-error-message="Last Name is required" valid-method="watch" />
+                           class="login"
+                           ng-model="userRoles.lastName"
+                           ng-minlength="2"
+                           ng-maxlength="8"
+                           required
+                    />
+                    <!-- show an error if username is too short -->
+                    <p ng-show="signupForm.lastName.$error.minlength">Last Name is too short.</p>
+
+                    <!-- show an error if username is too long -->
+                    <p ng-show="signupForm.lastName.$error.maxlength">Last Name is too long.</p>
+
+                    <!-- show an error if this isn't filled in -->
+                    <p ng-show="signupForm.lastName.$error.required">Last Name is required.</p>
                 </div>
                 <!-- /field -->
 
@@ -38,17 +62,29 @@
 
                 <div class="field">
                     <label for="password">Password:</label>
-                    <input type="password" name="password" id="password" value="" placeholder="Password"
-                           class="login" ng-model="userRoles.users.password" validator="required"
-                           required-error-message="Password is required" valid-method="watch" />
+                    <input type="password"
+                           name="password"
+                           id="password"
+                           value=""
+                           placeholder="Password"
+                           class="login"
+                           ng-model="userRoles.users.password"
+                           validator="required"
+                           required-error-message="Password is required"
+                           valid-method="watch" />
                 </div>
                 <!-- /field -->
 
                 <div class="field">
                     <label for="confirm_password">Confirm Password:</label>
-                    <input type="password" id="confirm_password" name="confirm_password" value=""
-                           placeholder="Confirm Password" class="login"
-                           required data-password-verify="userRoles.users.password"/>
+                    <input type="password"
+                           id="confirm_password"
+                           name="confirm_password"
+                           value=""
+                           placeholder="Confirm Password"
+                           class="login"
+                           required
+                           data-password-verify="userRoles.users.password"/>
                     <!--<div class="msg-block" ng-show="signupForm.$error" pw-check="password">
                         <span class="msg-error" ng-show="signupForm.confirm_password.$error.passwordVerify">Passwords don't match.</span>
                     </div>-->
@@ -61,13 +97,23 @@
             <div class="login-actions">
 
                 <span class="login-checkbox">
-					<input id="Field" name="Field" type="checkbox"
-                           class="field login-checkbox" value="First Choice" tabindex="4" />
-					<label class="choice" for="Field">Agree with the Terms & Conditions.</label>
+					<input id="signUpField"
+                           name="Field"
+                           type=checkbox
+                           ng-model="checked"
+                           class="field login-checkbox"
+                           value="First Choice" tabindex="4" />
+					<label class="choice" for="signUpField">Agree with the Terms & Conditions.</label>
 				</span>
 
-                <button class="button btn btn-primary btn-large" validation-submit="signupForm"
+                <button ng-model="button"
+                        id="registerButton"
+                        class="button btn btn-primary btn-large"
+                        validation-submit="signupForm"
+                        ng-disabled="!checked || "
                         ng-click="doSignUp()">Register</button>
+
+
 
             </div>
             <!-- .actions -->
